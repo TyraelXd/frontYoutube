@@ -31,6 +31,7 @@ export class UserComponent implements OnInit {
   }
 
   public delete(user: UserModel): void{
+    this.userService.delete(user);
   }
 
 }
