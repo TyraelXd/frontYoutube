@@ -2,6 +2,7 @@ import { UserModel } from './../model/user.model';
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +12,8 @@ import { UserService } from './user.service';
 })
 export class UserComponent implements OnInit {
   private users: Array<UserModel>;
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService,private router: Router) { }
 
   ngOnInit() {
     this.loadUsers();
@@ -21,6 +23,14 @@ export class UserComponent implements OnInit {
     this.userService.getUsers().subscribe(res => {
       this.users = res;
     })
+  }
+
+  public edit(user: UserModel): void{
+    sessionStorage.setItem('user', JSON.stringify(user));
+    this.router.navigate(['/createUserComponent']);
+  }
+
+  public delete(user: UserModel): void{
   }
 
 }
